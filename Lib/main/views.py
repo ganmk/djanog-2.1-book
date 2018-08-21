@@ -451,35 +451,3 @@ def staffChangeBookInfo(request):
         return HttpResponse("login Page,you are not login already")
     
    
-# http://127.0.0.1:8000/getCountryAPI?limit=100&page=1
-
-
-def getCountryAPI(request):
-    offset = request.GET['limit']
-    startPage = request.GET['page']
-    currentPage = int(startPage)
-    country_all = idd_country.objects.all().order_by('country_code')
-    countrydata = Paginator(country_all, int(offset))
-    cdata = countrydata.page(currentPage)
-    after_range_num = 5
-    befor_range_num = 4
-    countryList = cdata.object_list
-    ansCountryList = []
-    for item in countryList:
-        ansCountryList.append(
-            {"name": item.country_cnname, "code": item.country_code})
-
-    if currentPage-1 > after_range_num:
-        pageList = countrydata.page_range[currentPage -
-                                          1-after_range_num:currentPage-1+befor_range_num]
-    else:
-        pageList = countrydata.page_range[0:currentPage-1+befor_range_num]
-    #json_country = json.dumps(ansCountryList, ensure_ascii=False)
-    ans = {"code": 0, "count": country_all.count(), "data": ansCountryList,
-           "msg": ""}
-    return HttpResponse(json.dumps(ans, ensure_ascii=False), content_type="application/json")
-
-
-
-
-
