@@ -7,7 +7,7 @@ from django.contrib.auth.models import User as authUser
 from django.contrib import auth
 from django.core.paginator import Paginator
 
-from main.models import Book,BookType,BookNum,AddItem,BorrowItem,UserInfo,StaffInfo
+from main.models import Book,BookType,BookNum,AddItem,BorrowItem,UserInfo,StaffInfo, idd_country
 # Create your views here.
 def loginView(request):
     if request.user.is_authenticated:
@@ -449,3 +449,5 @@ def staffChangeBookInfo(request):
             return HttpResponse("you have no perm")
     else:
         return HttpResponse("login Page,you are not login already")
+    
+   
