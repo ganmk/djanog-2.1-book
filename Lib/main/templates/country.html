@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="keywords" content=""/>
+		<meta name="author" content="ZhangWeiJian"/>
+	    <link href="../static/css/layui.css" rel="stylesheet" />
+
+		<script type="text/javascript" src="../static/scripts/jquery.js"></script>
+        <script type="text/javascript" src="../static/scripts/layui.all.js"></script>
+		<title>国家列表</title>
+	</head>
+    <body>
+     <div class="countryList">
+     {% comment %} {% for country in countryList %}
+        <div class="country">
+            <div>
+              <span>{{country.country_cnname}}</span>
+            </div>
+        </div>
+     {% endfor %} {% endcomment %}
+      <table id="countryList" class="layui-table" lay-filter="country"></table>
+     </div>
+    </body>
+    <script>
+     layui.use(['table', 'layer', 'form', 'layedit', 'laydate'], function () {
+        var table = layui.table;
+        var form = layui.form;
+        var $ = layui.$;
+        var  laydate = layui.laydate;
+        var myindex = layer.load('正在加载数据', { time: 0 });
+
+          table.render({
+            elem: '#countryList'
+           , url: 'http://127.0.0.1:8000/getCountryAPI'
+           , method: 'get'
+           , page: true //开启分页
+           , limits: [10, 20, 30]
+        , limit: 10
+           , loading: true
+            , done: function (res, curr, count) {
+
+                layer.close(myindex);
+            }
+            , cols: [[
+             { field: 'name', title: 'country_cnname',  width: 200, sort: true, fixed: true }
+            , { field: 'code', title: 'country_code time', width: 160, sort: true, fixed: true }
+           
+          
+            ]]
+            , id: 'testReload',
+            height: 500
+        });
+
+     });
+    </script>
+</html>
