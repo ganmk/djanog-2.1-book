@@ -82,3 +82,14 @@ class idd_country(models.Model):
 
     def __unicode__(self):
         return self.country_code
+
+
+class news(models.Model):
+    classify = models.TextField()
+    title = models.TextField()
+    time = models.TextField()
+    url = models.TextField()
+    content = models.TextField(primary_key=True)
+
+    def __unicode__(self):
+        return '%s' % (self.title)

@@ -7,8 +7,15 @@ from django.contrib.auth.models import User as authUser
 from django.contrib import auth
 from django.core.paginator import Paginator
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
+import csv
+import pandas
+import os
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+from django.conf import settings
 
-from main.models import Book, BookType, BookNum, AddItem, BorrowItem, UserInfo, StaffInfo, idd_country
+from main.models import Book, BookType, BookNum, AddItem, BorrowItem, UserInfo, StaffInfo, idd_country, news
 # Create your views here.
 
 
@@ -553,3 +560,30 @@ def test(request):
 def viewCountry(request):
     countryans = idd_country.objects.all()
     return render(request, 'country.html', {"countryList": countryans})
+
+# http://127.0.0.1:8000/viewImportNews
+
+
+def viewImportNews(request):
+    return render(request, 'import_news.html', {})
+
+
+@csrf_exempt
+def importNews(request):
+    dict_data = {}
+    file = request.FILES.get('file')
+    path = default_storage.save('tmp/new.csv', ContentFile(file.read()))
+    path = os.path.abspath(path)
+    df = pandas.read_csv(path)
+    # print(type(df))
+    for index, row in df.iterrows():
+        try:
+            news.objects.create(classify=row[1],
+                                title=row[2], time=row[3], url=row[4],
+                                content=row[5])
+            print('add success')
+        except expression as identifier:
+            print(identifier)
+            pass
+
+    return HttpResponse("add success")

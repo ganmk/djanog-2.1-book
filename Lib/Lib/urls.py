@@ -24,5 +24,7 @@ urlpatterns = [
     path('getIdd_CountryInfo/', main.views.getIdd_CountryInfo),
     path('getCountryAPI/', main.views.getCountryAPI),
     path('test/', main.views.test),
-    path('viewCountry', main.views.viewCountry)
+    path('viewCountry', main.views.viewCountry),
+    path('viewImportNews', main.views.viewImportNews),
+    path('importNews', main.views.importNews)
 ]
