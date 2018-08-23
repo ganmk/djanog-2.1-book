@@ -594,8 +594,28 @@ def importNews(request):
 
 def newList(request):
     newsList = news.objects.filter(classify='国内财经').filter(
-         time=datetime.datetime.now().strftime('%Y-%m-%d'))
+        time__gte=datetime.datetime.now().strftime('%m-%d'))
+    print(datetime.datetime.now().strftime('%m-%d'))
     # print(newsList)
     # newsList = news.objects.filter(classify='国内财经')
     return render(request, 'index.html', {"newsList": newsList})
     # return render(request, 'index.html', {"newsList": newsList})
+
+
+import tushare as ts
+import time
+# http://127.0.0.1:8000/getnews
+
+
+def getnews(request):
+    df = ts.get_latest_news(top=100, show_content=True)
+    path = os.path.abspath('Result.csv')
+    df.to_csv(path)
+    df = pandas.read_csv(path)
+    print(df)
+    for index, row in df.iterrows():
+        # time.sleep(2) # 休眠1秒
+        news.objects.create(
+            classify=row[1], title=row[2], time=row[3], url=row[4], content=row[5])
+        #print('add success')
+    return HttpResponse("add success")

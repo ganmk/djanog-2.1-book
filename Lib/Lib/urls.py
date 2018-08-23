@@ -27,5 +27,6 @@ urlpatterns = [
     path('viewCountry', main.views.viewCountry),
     path('viewImportNews', main.views.viewImportNews),
     path('importNews', main.views.importNews),
-    path('index', main.views.newList)
+    path('index', main.views.newList),
+    path('getnews', main.views.getnews)
 ]

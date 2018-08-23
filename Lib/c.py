@@ -1,11 +1,13 @@
-#!user/bin/env python3  
-# -*- coding: gbk -*- 
+#!user/bin/env python3
+# -*- coding: gbk -*-
 import tushare as ts
 import json
 
-#ts.get_latest_news() #Ä¬ÈÏ»ñÈ¡×î½ü80ÌõĞÂÎÅÊı¾İ£¬Ö»Ìá¹©ĞÂÎÅÀàĞÍ¡¢Á´½ÓºÍ±êÌâ
-print(ts.get_latest_news(top=1,show_content=True)) #ÏÔÊ¾×îĞÂ5ÌõĞÂÎÅ£¬²¢´òÓ¡³öĞÂÎÅÄÚÈİ
-df =ts.get_latest_news(top=80,show_content=True)
+# ts.get_latest_news() #é»˜è®¤è·å–æœ€è¿‘80æ¡æ–°é—»æ•°æ®ï¼Œåªæä¾›æ–°é—»ç±»å‹ã€é“¾æ¥å’Œæ ‡é¢˜
+
+# æ˜¾ç¤ºæœ€æ–°5æ¡æ–°é—»ï¼Œå¹¶æ‰“å°å‡ºæ–°é—»å†…å®¹
+print(ts.get_latest_news(top=1, show_content=True))
+df = ts.get_latest_news(top=80, show_content=True)
 df.to_csv('D:/Result.csv')
 
 #f1 = open('a.txt','w')
