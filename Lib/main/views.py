@@ -593,6 +593,9 @@ def importNews(request):
 
 
 def newList(request):
+    """
+    国内财经 今日推送
+    """
     newsList = news.objects.filter(classify='国内财经').filter(
         time__gte=datetime.datetime.now().strftime('%m-%d'))
     for item in newsList:
@@ -612,6 +615,9 @@ import time
 
 
 def getnews(request):
+    """
+    调用 tushare ；一次抓取一百条财经新闻，并放在sqlite里存起来
+    """
     df = ts.get_latest_news(top=100, show_content=True)
     path = os.path.abspath('Result.csv')
     df.to_csv(path)
