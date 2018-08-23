@@ -595,7 +595,11 @@ def importNews(request):
 def newList(request):
     newsList = news.objects.filter(classify='国内财经').filter(
         time__gte=datetime.datetime.now().strftime('%m-%d'))
-    print(datetime.datetime.now().strftime('%m-%d'))
+    for item in newsList:
+        item.content = item.content.replace('。', '。\n')
+        # print(item.content)
+
+    # print(datetime.datetime.now().strftime('%m-%d'))
     # print(newsList)
     # newsList = news.objects.filter(classify='国内财经')
     return render(request, 'index.html', {"newsList": newsList})
