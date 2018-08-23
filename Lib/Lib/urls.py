@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.urls import path
 import main.views
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +29,6 @@ urlpatterns = [
     path('viewImportNews', main.views.viewImportNews),
     path('importNews', main.views.importNews),
     path('index', main.views.newList),
-    path('getnews', main.views.getnews)
+    path('getnews', main.views.getnews),
+    url(r'^$', main.views.newList)
 ]
