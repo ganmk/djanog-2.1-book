@@ -614,7 +614,7 @@ import time
 # http://127.0.0.1:8000/getnews
 
 
-def getnews(request):
+def getnews():
     """
     调用 tushare ；一次抓取一百条财经新闻，并放在sqlite里存起来
     """
@@ -629,3 +629,20 @@ def getnews(request):
             classify=row[1], title=row[2], time=row[3], url=row[4], content=row[5])
         #print('add success')
     return HttpResponse("add success")
+
+
+import schedule
+
+
+def job():
+    print("I'm working...")
+
+
+# schedule.every().minutes.do(job)
+# schedule.every(1).seconds.do(job)
+# schedule.every().hour.do(job)
+schedule.every().day.at("08:30").do(getnews)
+while True:
+    # 启动服务
+    schedule.run_pending()
+    time.sleep(1)
