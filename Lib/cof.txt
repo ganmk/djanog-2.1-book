@@ -1,0 +1,25 @@
+LoadFile "c:/users/administrator/appdata/local/programs/python/python37-32/pytho
+n37.dll"
+LoadModule wsgi_module "c:/users/administrator/appdata/local/programs/python/pyt
+hon37-32/lib/site-packages/mod_wsgi/server/mod_wsgi.cp37-win32.pyd"
+WSGIPythonHome "c:/users/administrator/appdata/local/programs/python/python37-32"
+
+#指定项目的wsgi.py配置文件路径,这个py文件是在你的Django项目中
+WSGIScriptAlias / F:/mybookcms/trunk/Lib/Lib/wsgi.py
+
+#指定项目目录,即你的Django项目路径
+WSGIPythonPath F:/mybookcms/trunk/Lib
+
+<Directory F:/mybookcms/trunk/Lib/Lib>
+<Files wsgi.py>  
+    Require all granted  
+</Files>  
+</Directory>
+
+#项目静态文件地址, Django项目中静态文件的路径
+Alias /static F:/mybookcms/trunk/Lib/main/static
+<Directory F:/mybookcms/trunk/Lib/main/static>
+	AllowOverride None
+	Options None
+	Require all granted
+</Directory> 
