@@ -17,6 +17,7 @@ from django.conf import settings
 
 from main.models import Book, BookType, BookNum, AddItem, BorrowItem, UserInfo, StaffInfo, idd_country, news
 # Create your views here.
+import datetime
 
 
 def loginView(request):
@@ -545,7 +546,7 @@ def getCountryAPI(request):
                                           1-after_range_num:currentPage-1+befor_range_num]
     else:
         pageList = countrydata.page_range[0:currentPage-1+befor_range_num]
-    #json_country = json.dumps(ansCountryList, ensure_ascii=False)
+    # json_country = json.dumps(ansCountryList, ensure_ascii=False)
     ans = {"code": 0, "count": country_all.count(), "data": ansCountryList,
            "msg": ""}
     return HttpResponse(json.dumps(ans, ensure_ascii=False), content_type="application/json")
@@ -587,3 +588,14 @@ def importNews(request):
             pass
 
     return HttpResponse("add success")
+
+# http://127.0.0.1:8000/index
+
+
+def newList(request):
+    newsList = news.objects.filter(classify='国内财经').filter(
+         time=datetime.datetime.now().strftime('%Y-%m-%d'))
+    # print(newsList)
+    # newsList = news.objects.filter(classify='国内财经')
+    return render(request, 'index.html', {"newsList": newsList})
+    # return render(request, 'index.html', {"newsList": newsList})

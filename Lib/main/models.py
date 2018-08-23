@@ -85,6 +85,7 @@ class idd_country(models.Model):
 
 
 class news(models.Model):
+
     classify = models.TextField()
     title = models.TextField()
     time = models.TextField()
