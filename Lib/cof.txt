@@ -1,8 +1,8 @@
-LoadFile "c:/users/administrator/appdata/local/programs/python/python37-32/pytho
-n37.dll"
+LoadFile "c:/users/administrator/appdata/local/programs/python/python37/python37
+.dll"
 LoadModule wsgi_module "c:/users/administrator/appdata/local/programs/python/pyt
-hon37-32/lib/site-packages/mod_wsgi/server/mod_wsgi.cp37-win32.pyd"
-WSGIPythonHome "c:/users/administrator/appdata/local/programs/python/python37-32"
+hon37/lib/site-packages/mod_wsgi/server/mod_wsgi.cp37-win_amd64.pyd"
+WSGIPythonHome "c:/users/administrator/appdata/local/programs/python/python37"
 
 #指定项目的wsgi.py配置文件路径,这个py文件是在你的Django项目中
 WSGIScriptAlias / F:/mybookcms/trunk/Lib/Lib/wsgi.py

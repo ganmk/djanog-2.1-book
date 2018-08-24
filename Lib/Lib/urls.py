@@ -26,9 +26,9 @@ urlpatterns = [
     path('getCountryAPI/', main.views.getCountryAPI),
     path('test/', main.views.test),
     path('viewCountry', main.views.viewCountry),
-    #path('viewImportNews', main.views.viewImportNews),
-    #path('importNews', main.views.importNews),
+    path('viewImportNews', main.views.viewImportNews),
+    path('importNews', main.views.importNews),
     path('index', main.views.newList),
-    #path('getnews', main.views.getnews),
+    path('getnews', main.views.getnews),
     url(r'^$', main.views.newList)
 ]
