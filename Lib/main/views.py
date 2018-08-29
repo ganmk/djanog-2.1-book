@@ -596,7 +596,7 @@ def newList(request):
     """
     国内财经 今日推送
     """
-    newsList = news.objects.filter(classify='国内财经').filter(
+    newsList = news.objects.filter(
         time__gte=datetime.datetime.now().strftime('%m-%d'))
     for item in newsList:
         item.content = item.content.replace('。', '。\n')
@@ -607,7 +607,16 @@ def newList(request):
     # newsList = news.objects.filter(classify='国内财经')
     return render(request, 'index.html', {"newsList": newsList})
     # return render(request, 'index.html', {"newsList": newsList})
-
+def newsDetail(request):
+    """
+    详情页
+    """
+    title = request.GET['title']
+    print(title)
+    newsList= news.objects.filter(title=title)
+    for item in newsList:
+        item.content = item.content.replace('。', '。\n')
+    return render(request, 'detail.html', {"newsList": newsList})
 
 import tushare as ts
 import time
@@ -641,7 +650,7 @@ def job():
 # schedule.every().minutes.do(job)
 #schedule.every(1).seconds.do(job)
 # schedule.every().hour.do(job)
-#schedule.every().day.at("09:57").do(getnews)
+schedule.every().day.at("09:57").do(getnews)
 #while True:
     # 启动服务
     #schedule.run_pending()
